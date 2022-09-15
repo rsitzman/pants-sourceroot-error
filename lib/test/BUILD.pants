@@ -1,0 +1,13 @@
+python_distribution(
+  name="dist",
+  provides=python_artifact(
+      name="test",
+      version="0.0.1",
+      description="test",
+      python_requires="~=3.6"
+  ),
+  wheel=False,
+  dependencies=[
+    "//lib/test/test:test"
+  ],
+)

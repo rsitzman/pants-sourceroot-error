@@ -1,0 +1,34 @@
+[GLOBAL]
+# pants_version = "2.11.1"
+pants_version = "2.13.0"
+use_deprecated_directory_cli_args_semantics = false
+use_deprecated_pex_binary_run_semantics = false
+
+backend_packages = [
+  "pants.backend.python",
+  "pants.backend.experimental.python"
+]
+
+[source]
+root_patterns = [
+# Adding project root as a source resolves the error
+# NoSourceRootError: No source root found for `3rdparty`.
+#
+#  "/",
+  "/lib/*"
+]
+
+[python]
+interpreter_constraints = ["CPython>=3.6.5,<3.7"]
+lockfile_generator = 'pex'
+enable_resolves = true
+
+[python.resolves]
+python-default = "3rdparty/python/default.lock"
+
+[setuptools]
+lockfile = "3rdparty/python/setuptools.lock"
+version = "setuptools<60.0,>=50.3.0"
+
+[tailor]
+build_file_name = "BUILD.pants"
